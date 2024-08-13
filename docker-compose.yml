@@ -1,18 +1,16 @@
-version: '3.8'
-
 services:
-  mysql:
-    container_name: mysql-bb
-    image: mysql:8.0
+  postgres:
+    container_name: postgres-sql-bb
+    image: postgres
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_USER: root
-      MYSQL_PASSWORD: password
-      MYSQL_DATABASE: book_buddies
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data
+      POSTGRES_DB: book_buddies
     volumes:
-      - mysql:/var/lib/mysql
+      - postgres:/data/postgres
     ports:
-      - 3306:3306
+      - 5432:5432
     networks:
       - spring-demo
     restart: unless-stopped
@@ -29,5 +27,5 @@ networks:
     driver: bridge
 
 volumes:
-  mysql:
+  postgres:
     driver: local
